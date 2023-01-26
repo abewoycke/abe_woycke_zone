@@ -13,22 +13,25 @@ def create_connection(database):
         print(e)
 
 def create_table(c):
-    sql = """ 
+    sql = """
             CREATE TABLE IF NOT EXISTS poll_options (
                 name varchar(225) PRIMARY KEY,
                 votes integer Default 0
-            ); 
+            );
         """
     c.execute(sql)
 
 def create_item(c, item):
     sql = ''' INSERT INTO poll_options(name)
                   VALUES (?)  '''
-    c.execute(sql, item)
+    try:
+        c.execute(sql, item)
+    except:
+        print("Error creating item occurred")
 
 def update_item(c, item):
     sql = ''' UPDATE poll_options
-                  SET votes = votes+1 
+                  SET votes = votes+1
                   WHERE name = ? '''
     c.execute(sql, item)
 
@@ -38,14 +41,13 @@ def select_all_items(c, name):
     rows = conn.fetchall()
     return rows
 
-def main():
+def db_setup():
     database = "./awz_sqlite.db"
     conn = create_connection(database)
     c = conn.cursor()
     create_table(c)
     for date in sandwich_dates_to_poll():
         create_item(c, [date])
-    print("Database connection established!")
 
 if __name__ == '__main__':
-    main()
+    db_setup()
