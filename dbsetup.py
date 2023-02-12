@@ -12,35 +12,9 @@ def create_connection(database):
     except Error as e:
         print(e)
 
-def create_table(c):
-    sql = """
-            CREATE TABLE IF NOT EXISTS dim_participant (
-                participant_pk INTEGER PRIMARY KEY,
-                submitted_name TEXT NOT NULL
-            )
-            CREATE TABLE IF NOT EXISTS dim_poll (
-                poll_pk INTEGER PRIMARY KEY,
-                month INTEGER NOT NULL,
-                year INTEGER NOT NULL,
-                squad TEXT NOT NULL
-            )
-            CREATE TABLE IF NOT EXISTS fact_response (
-                response_pk INTEGER PRIMARY KEY,
-                participant_fk INTEGER NOT NULL,
-                poll_fk INTEGER NOT NULL,
-                submitted_dt INTEGER NOT NULL,
-                poll_option TEXT NOT NULL,
-                response INTEGER DEFAULT 0,
-                FOREIGN KEY (participant_fk)
-                    REFERENCES dim_participant (participant_pk)
-                        ON DELETE CASCADE
-                        ON UPDATE NO ACTION
-                FOREIGN KEY (poll_fk)
-                    REFERENCES dim_poll (poll_pk)
-                        ON DELETE CASCADE
-                        ON UPDATE NO ACTION
-            );
-        """
+def create_tables(c):
+    with open('create_polling_db.sql','r') as sql_file:
+        sql = sql_file.read()
     c.execute(sql)
 
 def create_item(c, item):
@@ -51,11 +25,7 @@ def create_item(c, item):
     except:
         print("Error creating item occurred")
 
-def update_item(c, item):
-    sql = ''' UPDATE poll_options
-                  SET votes = votes+1
-                  WHERE name = ? '''
-    c.execute(sql, item)
+
 
 def select_all_items(c, name):
     sql = ''' SELECT * FROM poll_options '''

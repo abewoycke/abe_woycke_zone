@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask_cors import CORS
 
 from dates import sandwich_dates_to_poll
-from dbsetup import create_connection, update_item
+from dbsetup import create_connection, poll_response
 from socket import gethostname
 
 import os.path
