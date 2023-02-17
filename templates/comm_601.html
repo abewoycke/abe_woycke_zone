@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Hello, Comm 601 - Cinema</h1>
+  <form action="{{ url_for('submit_poll') }}" method="POST">
+    <h2>Please mark which of the following times work for you for next month.</h2>
+      <input type="text" placeholder="Enter your name" id="name" name="name"/><br>
+      <input type="hidden" id='group_name' name="group_name" value="comm_601"/>
+      <br>
+        {% for datetime in options %}
+          <input type="checkbox" id={{ datetime.replace(" ","-") }} name={{ datetime.replace(" ","-") }} value=1>
+          <label for={{ datetime.replace(" ","-") }}>{{ datetime }}</label><br>
+        {% endfor %}
+      <br>
+      <input type="submit" value="Submit">
+  </form>
+{% endblock %}

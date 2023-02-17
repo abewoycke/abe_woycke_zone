@@ -53,6 +53,23 @@ def taustin_dnd_dates_to_poll():
         date_of_interest += timedelta(days=1)
     return taustin_dnd_poll_options
 
+# next month's relevant dates for comm_601
+def comm_601_dates_to_poll():
+    """returns a list of strings, containing the Fridays, Saturdays, and Sundays for an upcoming month,
+        with corresponding times comm_601"""
+    first_of_next = dates_setup()
+    comm_601_poll_options = []
+    date_of_interest = first_of_next
+    while date_of_interest.month == first_of_next.month:
+        if date_of_interest.weekday() == 4:
+            comm_601_poll_options.append(date_of_interest.strftime('%A %m/%d 9pm CT'))
+        elif date_of_interest.weekday() == 5:
+            comm_601_poll_options.append(date_of_interest.strftime('%A %m/%d 8pm CT'))
+        elif date_of_interest.weekday() == 6:
+            comm_601_poll_options.append(date_of_interest.strftime('%A %m/%d 8pm CT'))
+        date_of_interest += timedelta(days=1)
+    return comm_601_poll_options
+
 def main():
     sandwich_dates_to_poll()
 
