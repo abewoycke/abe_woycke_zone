@@ -1,8 +1,4 @@
 /* Instantiate abe_woycke_zone polling db */
-DROP TABLE dim_participant;
-DROP TABLE dim_poll;
-DROP TABLE dim_group;
-DROP TABLE fact_response;
 
 CREATE TABLE IF NOT EXISTS dim_group (
 	group_pk INTEGER PRIMARY KEY,
@@ -33,7 +29,6 @@ CREATE TABLE IF NOT EXISTS fact_response (
 	participant_fk INTEGER NOT NULL,
 	poll_fk INTEGER NOT NULL,
 	group_fk INTEGER NOT NULL,
-	submitted_dt INTEGER NOT NULL,
 	poll_option TEXT NOT NULL,
 	response INTEGER DEFAULT 0,
 	FOREIGN KEY (participant_fk)

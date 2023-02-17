@@ -5,12 +5,11 @@
 * 3. month
 * 4. year
 * 5. group_name
-* 6. submitted_dt
-* 7. poll_option
-* 8. response
+* 6. poll_option
+* 7. response
 */
 
-INSERT INTO fact_response (participant_fk,poll_fk,group_fk,submitted_dt, poll_option, response)
+INSERT INTO fact_response (participant_fk,poll_fk,group_fk,poll_option,response)
 VALUES (
 -- participant_fk
 (SELECT participant_pk FROM dim_participant dp
@@ -22,5 +21,5 @@ WHERE group_name = ?) AND month = ? AND year = ?),
 -- group_fk	
 (SELECT group_pk FROM dim_group dg
 WHERE group_name = ?),
--- submitted_dt, poll_option, response	
-?, ?, ?);
+-- poll_option, response
+?, ?);
