@@ -8,8 +8,9 @@ def dates_setup():
     now = dt.today()
     one_month = timedelta(days=30)
     next_month = now + one_month
+    first_of_current = date(now.year,now.month,1)
     first_of_next = date(next_month.year,next_month.month,1)
-    return first_of_next
+    return first_of_current
 
 # next month's relevant dates for sandwich
 def sandwich_dates_to_poll():
