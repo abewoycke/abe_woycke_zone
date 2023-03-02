@@ -1,4 +1,5 @@
 from dbsetup import init_conn
+import os
 
 class poll_response:
     def __init__(self, group_name: str, submitted_name: str, month: int, year: int, poll_option: str, response: int):
@@ -13,7 +14,9 @@ class poll_response:
         c = init_conn()
         # for a given sql file, run with connection c
         def record_records(file, *args):
-            with open(file) as sql:
+            BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+            sql_path = os.path.join(BASE_DIR, file)
+            with open(sql_path) as sql:
                 update = sql.read()
             c.execute(update, args)
 
