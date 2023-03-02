@@ -13,7 +13,9 @@ def create_connection(database):
         print(e)
 
 def create_tables(c):
-    with open('create_polling_db.sql','r') as sql_file:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    sql_path = os.path.join(BASE_DIR, 'create_polling_db.sql')
+    with open(sql_path,'r') as sql_file:
         sql = sql_file.read()
     c.executescript(sql)
 
