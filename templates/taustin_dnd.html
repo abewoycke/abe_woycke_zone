@@ -4,7 +4,7 @@
 <h1>Hiya, Taustin DnD folks!</h1>
   <form id='form' action="{{ url_for('submit_poll') }}" method="POST">
     <h2>Please mark which of the following times work for you for next month.</h2>
-      <input type="text" placeholder="Enter your name" id="name" name="name"><br>
+      <input type="text" placeholder="Enter your name" id="name" name="name" required><br>
       <input type="hidden" id='group_name' name="group_name" value="taustin_dnd"/>
       <br>
         {% for datetime in options %}

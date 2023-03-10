@@ -2,13 +2,14 @@ from dbsetup import init_conn
 import os
 
 class poll_response:
-    def __init__(self, group_name: str, submitted_name: str, month: int, year: int, poll_option: str, response: int):
+    def __init__(self, group_name: str, submitted_name: str, month: int, year: int, poll_option: str, response: int, submitted_dt: str):
         self.group_name = group_name
         self.submitted_name = submitted_name
         self.month = month
         self.year = year
         self.poll_option = poll_option
         self.response = response
+        self.submitted_dt = submitted_dt
 
     def record_votes(self):
         c = init_conn()

@@ -71,6 +71,15 @@ def comm_601_dates_to_poll():
         date_of_interest += timedelta(days=1)
     return comm_601_poll_options
 
+# the prior month year combo, as well as this month and next
+def results_dates():
+    """returns a list of strings containing the prior month year combo, as well as this month and next"""
+    dates = []
+    dates.append((dt.today() - timedelta(days=30)).strftime('%B %Y').replace(" ","_"))  # prior month year
+    dates.append(dt.today().strftime('%B %Y').replace(" ","_")) # current Month Year (as in March_2023)
+    dates.append((dt.today() + timedelta(days=30)).strftime('%B %Y').replace(" ","_")) # next month year
+    return dates
+
 def main():
     sandwich_dates_to_poll()
 

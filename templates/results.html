@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Hello there, poll result seeker</h1>
+  <form id="view_poll_results" onsubmit="return ajaxpost()">
+      <label for="group">Which group would you like to see results for?</label>
+        </br>
+        <select name="group" id="group">
+          <option value="sandwich">Sandwich</option>
+          <option value="taustin_dnd">Taustin DnD</option>
+          <option value="comm_601">Comm 601</option>
+        </select>
+      </br>
+      </br>
+      <label for="month">Which month?</label>
+        </br>
+        <select name="month" id="month">
+      {% for date in dates %}
+          <option value={{date}}>{{date.replace("_"," ")}}</option>
+          {% endfor %}
+        </select>
+      </br>
+      </br>
+      <input type="submit" value="Submit">
+    </form>
+{% endblock %}

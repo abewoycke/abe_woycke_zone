@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS dim_poll (
 
 CREATE TABLE IF NOT EXISTS fact_response (
 	response_pk INTEGER PRIMARY KEY,
+	submitted_dt TEXT NOT NULL,
 	participant_fk INTEGER NOT NULL,
 	poll_fk INTEGER NOT NULL,
 	group_fk INTEGER NOT NULL,
