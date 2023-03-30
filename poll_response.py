@@ -2,16 +2,17 @@ from dbsetup import init_conn
 import os
 
 class poll_response:
-    def __init__(self, group_name: str, submitted_name: str, month: int, year: int, poll_option: str, response: int, submitted_dt: str):
-        self.group_name = group_name
-        self.submitted_name = submitted_name
+    def __init__(self, crew: str, participant: str, month: int, day: int, year: int, time_description: str, response: int, submitted_dt: str):
+        self.crew = crew
+        self.participant = participant
         self.month = month
+        self.day = day
         self.year = year
-        self.poll_option = poll_option
+        self.time_description = time_description
         self.response = response
         self.submitted_dt = submitted_dt
 
-    def record_votes(self):
+    def insert_responses(self):
         c = init_conn()
         # for a given sql file, run with connection c
         def record_records(file, *args):
@@ -21,9 +22,7 @@ class poll_response:
                 update = sql.read()
             c.execute(update, args)
 
-        record_records('insert_ignore_dim_group.sql',self.group_name)
-        record_records('insert_ignore_dim_participant.sql',self.submitted_name)
-        record_records('insert_ignore_dim_poll.sql',self.group_name,self.month,self.year)
-        record_records('insert_fact_response.sql',self.submitted_name,self.group_name,
-                       self.month,self.year,self.group_name,
-                       self.poll_option,self.response)
+        record_records('insert_response.sql',self.crew,self.participant,
+                       self.month,self.day,self.year,
+                       self.time_description,self.response,
+                       self.submitted_dt)

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Hello, {{ crew }} admin</h1>
+    <br>
+    <h3>Which month would you like to view results for?</h3>
+
+    <select class="select-month" id="select-month" name="month">
+      <option value="default" selected>--select month--</option>
+      {% for month in moi%}
+      <option value={{ month.replace(" ","-") }}>{{ month }}</option>
+      {% endfor %}
+    </select>
+
+      <br><br>
+
+{% for month, html in moi|zip(html) %}
+<form id = "{{ month.replace(" ","-") }}">
+{{ html|safe }}
+</form>
+{% endfor %}
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+<script>
+$(document).ready(function(){
+	$("form").hide();
+})
+
+$("#select-month").change(function(){
+	monthChange($(this).val());
+});
+
+function monthChange(monthValue){
+	$("form").hide();
+
+    switch(monthValue){
+    {% for month in moi%}
+    case "{{ month.replace(" ","-") }}":
+        $("#{{ month.replace(" ","-") }}").show();
+        break;
+    {% endfor %}
+  }
+}
+</script>
+{% endblock %}
