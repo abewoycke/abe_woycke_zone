@@ -15,6 +15,7 @@ lxml==4.9.2
 mock==5.0.1
 numpy==1.24.1
 ordereddict==1.1
+pandas=1.5.3
 protobuf==4.21.12
 pyOpenSSL==23.0.0
 python-dotenv==0.21.0
